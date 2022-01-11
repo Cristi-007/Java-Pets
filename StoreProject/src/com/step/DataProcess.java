@@ -17,11 +17,13 @@ public class DataProcess {
 
     public void productView(Product[] products, int productIndex) {
 
-        System.out.println("\t\t\tINFO\n");
-        System.out.println("****");
-        System.out.println("Product name: " + products[productIndex-1].getNaming());
-        System.out.println("Product Price: " + products[productIndex-1].getPrice());
-        System.out.println("Product Manufacturer: " + products[productIndex-1].getManufacturer());
+        System.out.println("\t\t\t\t**PRODUCT INFO**\n");
+        System.out.println("  Naming:\t\t\t\t" + products[productIndex-1].getNaming());
+        System.out.println("---------------------------------------------");
+        System.out.println("  Price:\t\t\t\t" + products[productIndex-1].getPrice());
+        System.out.println("---------------------------------------------");
+        System.out.println("  Manufacturer:\t\t\t" + products[productIndex-1].getManufacturer());
+        System.out.println("---------------------------------------------");
 
         System.out.println("\nTo return enter any number: ");
         menu.intInput();

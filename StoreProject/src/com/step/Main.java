@@ -8,8 +8,7 @@ public class Main {
         Product[] goods = new Product[5];
         Menu menu = new Menu();
         DataProcess dataProcess = new DataProcess();
-
-
+        
         for (int i=0; i< goods.length; i++) {
 
             switch (i) {
@@ -43,12 +42,10 @@ public class Main {
 
                         if (meniuChoosed> goods.length) {
                             System.out.println("Product with this number does not exist, please enter another number.");
-                            meniuChoosed = menu.intInput();
                         } else {
                             dataProcess.productView(goods, meniuChoosed);
                             break;
                         }
-
                     }
                     break;
 
