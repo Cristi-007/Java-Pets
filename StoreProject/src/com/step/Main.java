@@ -8,7 +8,7 @@ public class Main {
         Product[] goods = new Product[5];
         Menu menu = new Menu();
         DataProcess dataProcess = new DataProcess();
-        
+
         for (int i=0; i< goods.length; i++) {
 
             switch (i) {
