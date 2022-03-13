@@ -16,8 +16,8 @@ public class EditController {
     @FXML
     private TextField nameTextField;
 
-//    @FXML
-//    private DatePicker birthdatePicker;
+    @FXML
+    private DatePicker birthdatePicker;
 
     @FXML
     private TextField surnameTextField;
@@ -28,8 +28,6 @@ public class EditController {
     @FXML
     private TextField addressTextField;
 
-
-
     private Employee data;
 
     public void setData(Employee data) {
@@ -39,12 +37,10 @@ public class EditController {
         surnameTextField.setText(data.getSurname());
         idnpTextField.setText(data.getIDNP());
         addressTextField.setText(data.getAddress());
-//        birthdatePicker.setValue(data.getBirthdate());
+        birthdatePicker.setValue(data.getBirthdate());
     }
 
-    public Employee getData() {
-        return data;
-    }
+    public Employee getData() { return data; }
 
     @FXML
     void cancel(ActionEvent event) {
@@ -53,7 +49,7 @@ public class EditController {
 
     @FXML
     void add(ActionEvent event) {
-        this.data = new Employee(Integer.parseInt(idTextField.getText()), nameTextField.getText(), surnameTextField.getText(), idnpTextField.getText(), addressTextField.getText() );
+        this.data = new Employee(Integer.parseInt(idTextField.getText()), nameTextField.getText(), surnameTextField.getText(), idnpTextField.getText(), addressTextField.getText(), birthdatePicker.getValue() );
         closeWindow(event);
     }
 
@@ -62,6 +58,4 @@ public class EditController {
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();
     }
-
-
 }

@@ -12,13 +12,15 @@ import java.time.LocalDate;
 
 public class AddController {
     private Employee result;
+    private boolean cancel = false;
+
+    public boolean isCancel() {
+        return cancel;
+    }
 
     public Employee getResult() {
         return result;
     }
-
-    @FXML
-    private TextField idTextField;
 
     @FXML
     private TextField nameTextField;
@@ -37,26 +39,17 @@ public class AddController {
 
     @FXML
     void add(ActionEvent event) {
-        // field checking
-//        if (idTextField.getText() != null && !idTextField.getText().isEmpty()) {
-//            Integer id = Integer.parseInt(idTextField.getText());
-//            String name = nameTextField.getText();
-//            LocalDate date = birthdatePicker.getValue();
-//            result = new Employee(id, name, date);
-//            System.out.println(result);
-//            closeWindow(event);
-//        }
-
-
-            Integer id = Integer.parseInt(idTextField.getText());
+//         field checking
+        if (nameTextField.getText() != null && !nameTextField.getText().isEmpty() && surnameTextField.getText() != null && !surnameTextField.getText().isEmpty() && idnpTextField.getText() != null && !idnpTextField.getText().isEmpty()) {
             String name = nameTextField.getText();
             String surname = surnameTextField.getText();
+            LocalDate date = birthdatePicker.getValue();
             String idnp = idnpTextField.getText();
             String address = addressTextField.getText();
-//            LocalDate date = birthdatePicker.getValue();
-            result = new Employee(id, name, surname, idnp, address);
-            System.out.println(result);
+            result = new Employee(name, surname, idnp, address, date);
             closeWindow(event);
+
+        } else { cancel=true; }
     }
 
     private void closeWindow (ActionEvent event) {

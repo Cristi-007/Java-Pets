@@ -50,7 +50,7 @@
       <Button layoutX="35.0" layoutY="409.0" mnemonicParsing="false" onAction="#openEditDialog" prefHeight="37.0" prefWidth="124.0" text="Edit employee" />
       <Button layoutX="328.0" layoutY="409.0" mnemonicParsing="false" onAction="#openDeleteDialog" prefHeight="37.0" prefWidth="124.0" text="Delete employee" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="65.0" layoutX="467.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="415.0" />
-      <Button layoutX="817.0" layoutY="415.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="52.0" text="Search" />
+      <Button layoutX="817.0" layoutY="415.0" mnemonicParsing="false" onAction="#searchButtonPress" prefHeight="37.0" prefWidth="52.0" text="Search" />
       <Label layoutX="628.0" layoutY="381.0" prefHeight="20.0" prefWidth="94.0" text="SEARCH BOX" textAlignment="CENTER" textFill="#0c00f5" underline="true">
          <font>
             <Font size="14.0" />

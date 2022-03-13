@@ -47,27 +47,19 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Employee, String> idnpColumn;
 
-//    @FXML
-//    private TableColumn<Employee, ?> birthdateColumn;
+    @FXML
+    private TableColumn<Employee, LocalDate> birthdateColumn;
 
     @FXML
     private TableColumn<Employee, String> addressColumn;
 
 
-
-
-    @FXML
-    private TableColumn<Employee, LocalDate> birthdateColumn;
-    private EmployeeDBAccess DBAccess;
-
-
+    private EmployeeDBAccess DBAccess = new EmployeeDBAccess();
     private ObservableList<Employee> employeeData = FXCollections.observableArrayList();
 
 
     @FXML
     void openAddDialog(ActionEvent event) throws IOException, SQLException {
-        // open Add window
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addWindow.fxml"));
         AnchorPane container = loader.load();
         AddController addController = loader.getController();
@@ -77,9 +69,12 @@ public class MainController implements Initializable {
         stage.setOnCloseRequest(new AddDialogCloseHandler());
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
-        Employee emp = addController.getResult();
-        DBAccess.insert(emp);
-        this.employeeData.add(emp);
+
+        // Error on press Cancel button
+        if(!addController.isCancel()){
+            this.employeeData.add(addController.getResult());
+            DBAccess.insert(addController.getResult());
+        }
     }
 
     @FXML
@@ -97,7 +92,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void openEditDialog(ActionEvent event) throws IOException {
+    void openEditDialog(ActionEvent event) throws IOException, SQLException {
         int selectedRow = tableView.getSelectionModel().getSelectedIndex();
         if(selectedRow != -1) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editWindow.fxml"));
@@ -109,34 +104,43 @@ public class MainController implements Initializable {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-//            Employee emp = editController.getData();
+
             this.employeeData.get(selectedRow).setName(editController.getData().getName());
-//            this.employeeData.get(selectedRow).setBirthdate(editController.getData().getBirthdate());
+            this.employeeData.get(selectedRow).setSurname(editController.getData().getSurname());
+            this.employeeData.get(selectedRow).setIDNP(editController.getData().getIDNP());
+            this.employeeData.get(selectedRow).setAddress(editController.getData().getAddress());
+            this.employeeData.get(selectedRow).setBirthdate(editController.getData().getBirthdate());
+            DBAccess.update(editController.getData());
         }
+    }
+
+    @FXML
+    void searchButtonPress(ActionEvent event) {
 
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Employee> emps = null;
 
-        // de ce cere ca sa fie static????
+
         try {
-            emps = EmployeeDBAccess.readAll();
+            emps = DBAccess.readAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
         this.employeeData.addAll(emps);
         tableView.setItems(employeeData);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         idnpColumn.setCellValueFactory(new PropertyValueFactory<>("IDNP"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("adress"));
-//        birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
     }
-
-
 }
 
 

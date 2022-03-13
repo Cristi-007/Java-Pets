@@ -6,21 +6,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="414.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.step.manager.controllers.AddController">
+<AnchorPane prefHeight="371.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.step.manager.controllers.AddController">
    <children>
-      <Label layoutX="57.0" layoutY="40.0" prefHeight="17.0" prefWidth="15.0" text="ID" />
-      <Label layoutX="47.0" layoutY="88.0" prefHeight="17.0" prefWidth="36.0" text="Name" />
-      <Label layoutX="32.0" layoutY="190.0" prefHeight="17.0" prefWidth="51.0" text="Birthdate" />
-      <TextField fx:id="idTextField" layoutX="126.0" layoutY="36.0" prefHeight="25.0" prefWidth="163.0" />
-      <TextField fx:id="nameTextField" layoutX="126.0" layoutY="84.0" prefHeight="25.0" prefWidth="163.0" />
-      <Button layoutX="39.0" layoutY="357.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="87.0" text="Add" />
-      <Button layoutX="201.0" layoutY="357.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="87.0" text="Cancel" />
-      <DatePicker fx:id="birthdatePicker" layoutX="125.0" layoutY="186.0" prefHeight="25.0" prefWidth="163.0" />
-      <Label layoutX="32.0" layoutY="139.0" prefHeight="17.0" prefWidth="51.0" text="Surname" />
-      <TextField fx:id="surnameTextField" layoutX="126.0" layoutY="135.0" prefHeight="25.0" prefWidth="163.0" />
-      <Label layoutX="47.0" layoutY="246.0" prefHeight="17.0" prefWidth="36.0" text="IDNP" />
-      <TextField fx:id="idnpTextField" layoutX="126.0" layoutY="242.0" prefHeight="25.0" prefWidth="163.0" />
-      <Label layoutX="32.0" layoutY="301.0" prefHeight="17.0" prefWidth="51.0" text="Address" />
-      <TextField fx:id="addressTextField" layoutX="126.0" layoutY="297.0" prefHeight="25.0" prefWidth="163.0" />
+      <Label layoutX="50.0" layoutY="36.0" prefHeight="17.0" prefWidth="36.0" text="Name" />
+      <Label layoutX="35.0" layoutY="138.0" prefHeight="17.0" prefWidth="51.0" text="Birthdate" />
+      <TextField fx:id="nameTextField" layoutX="129.0" layoutY="32.0" prefHeight="25.0" prefWidth="163.0" />
+      <Button layoutX="42.0" layoutY="305.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="87.0" text="Add" />
+      <Button layoutX="204.0" layoutY="305.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="87.0" text="Cancel" />
+      <DatePicker fx:id="birthdatePicker" layoutX="128.0" layoutY="134.0" prefHeight="25.0" prefWidth="163.0" />
+      <Label layoutX="35.0" layoutY="87.0" prefHeight="17.0" prefWidth="51.0" text="Surname" />
+      <TextField fx:id="surnameTextField" layoutX="129.0" layoutY="83.0" prefHeight="25.0" prefWidth="163.0" />
+      <Label layoutX="50.0" layoutY="194.0" prefHeight="17.0" prefWidth="36.0" text="IDNP" />
+      <TextField fx:id="idnpTextField" layoutX="129.0" layoutY="190.0" prefHeight="25.0" prefWidth="163.0" />
+      <Label layoutX="35.0" layoutY="249.0" prefHeight="17.0" prefWidth="51.0" text="Address" />
+      <TextField fx:id="addressTextField" layoutX="129.0" layoutY="245.0" prefHeight="25.0" prefWidth="163.0" />
    </children>
 </AnchorPane>

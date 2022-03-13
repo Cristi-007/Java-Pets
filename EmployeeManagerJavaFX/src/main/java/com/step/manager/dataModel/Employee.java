@@ -10,17 +10,25 @@ public class Employee {
     private StringProperty name;
     private StringProperty surname;
     private StringProperty IDNP;
-//    private ObjectProperty<LocalDate> birthdate;
+    private ObjectProperty<LocalDate> birthdate;
     private StringProperty address;
 
 
-    public Employee(int id, String name, String surname, String IDNP, String address) {
-//        ObjectProperty<LocalDate> birthdate,
+    public Employee(int id, String name, String surname, String IDNP, String address, LocalDate birthdate) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
         this.IDNP = new SimpleStringProperty(IDNP);
-//        this.birthdate = birthdate;
+        this.birthdate = new SimpleObjectProperty<>(birthdate);
+        this.address = new SimpleStringProperty(address);
+    }
+
+
+    public Employee(String name, String surname, String IDNP, String address, LocalDate birthdate) {
+        this.name = new SimpleStringProperty(name);
+        this.surname = new SimpleStringProperty(surname);
+        this.IDNP = new SimpleStringProperty(IDNP);
+        this.birthdate = new SimpleObjectProperty<>(birthdate);
         this.address = new SimpleStringProperty(address);
     }
 
@@ -73,17 +81,21 @@ public class Employee {
         this.IDNP.set(IDNP);
     }
 
-//    public LocalDate getBirthdate() {
-//        return birthdate.get();
-//    }
-//
-//    public ObjectProperty<LocalDate> birthdateProperty() {
-//        return birthdate;
-//    }
-//
-//    public void setBirthdate(LocalDate birthdate) {
-//        this.birthdate.set(birthdate);
-//    }
+
+
+    public LocalDate getBirthdate() {
+        return birthdate.get();
+    }
+
+    public ObjectProperty<LocalDate> birthdateProperty() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate.set(birthdate);
+    }
+
+
 
     public String getAddress() {
         return address.get();
@@ -104,7 +116,7 @@ public class Employee {
                 ", name=" + name +
                 ", surname=" + surname +
                 ", IDNP=" + IDNP +
-//                ", birthdate=" + birthdate +
+                ", birthdate=" + birthdate +
                 ", address=" + address +
                 '}';
     }
