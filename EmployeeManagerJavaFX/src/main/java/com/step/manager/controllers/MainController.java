@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -32,6 +29,8 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    public TextField searchIDNPTextField;
+    public DatePicker searchDatePicker;
     @FXML
     private TableView<Employee> tableView;
 
@@ -56,6 +55,18 @@ public class MainController implements Initializable {
 
     private EmployeeDBAccess DBAccess = new EmployeeDBAccess();
     private ObservableList<Employee> employeeData = FXCollections.observableArrayList();
+
+
+    public void insertDataInTable(List<Employee> emps) {
+            this.employeeData.addAll(emps);
+            tableView.setItems(employeeData);
+            idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            idnpColumn.setCellValueFactory(new PropertyValueFactory<>("IDNP"));
+            addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+            birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
+    }
 
 
     @FXML
@@ -115,8 +126,27 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void searchButtonPress(ActionEvent event) {
+    void resetButton(ActionEvent event) throws SQLException {
+        List<Employee> emps =  DBAccess.readAll();
 
+        this.employeeData.clear();
+        insertDataInTable(emps);
+        searchIDNPTextField.clear();
+        searchDatePicker.getEditor().clear();
+    }
+
+    @FXML
+    void searchButton(ActionEvent event) throws SQLException {
+        String searchIDNP = searchIDNPTextField.getText();
+        LocalDate searchBithdate = searchDatePicker.getValue();
+
+        List<Employee> emps =  DBAccess.search(searchIDNP,searchBithdate);
+
+        this.employeeData.clear();
+
+        if(emps != null){
+            insertDataInTable(emps);
+        }
     }
 
 
@@ -130,16 +160,7 @@ public class MainController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        this.employeeData.addAll(emps);
-        tableView.setItems(employeeData);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        idnpColumn.setCellValueFactory(new PropertyValueFactory<>("IDNP"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
+        insertDataInTable(emps);
     }
 }
 

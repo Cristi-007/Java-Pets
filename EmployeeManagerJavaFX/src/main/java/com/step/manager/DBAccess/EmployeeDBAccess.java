@@ -113,4 +113,59 @@ public class EmployeeDBAccess {
         connection.close();
         return employees;
     }
+
+
+    //SEARCH
+    public static List<Employee> search(String searchIDNP, LocalDate searchBirthdate) throws SQLException {
+        List<Employee> employees = new ArrayList<>();
+        String select = null;
+
+        Connection connection = getConnection();
+
+        if (!searchIDNP.isEmpty()  && searchBirthdate == null){
+            select = "SELECT * FROM main.employee where IDNP = ?";
+
+        }else if (searchIDNP.isEmpty() && searchBirthdate != null){
+            select = "SELECT * FROM main.employee where birthdate = ?";
+
+        } else if (!searchIDNP.isEmpty() && searchBirthdate != null){
+            select = "SELECT * FROM main.employee where IDNP = ? and birthdate = ?";
+
+        } else {
+            return null;
+        }
+
+        PreparedStatement statement = connection.prepareStatement(select);
+
+        if (!searchIDNP.isEmpty()  && searchBirthdate == null){
+            statement.setString(1,searchIDNP);
+
+        }else if (searchIDNP.isEmpty() && searchBirthdate != null){
+            statement.setDate(1, Date.valueOf(searchBirthdate));
+
+        } else if (!searchIDNP.isEmpty() && searchBirthdate != null){
+            statement.setString(1,searchIDNP);
+            statement.setDate(2, Date.valueOf(searchBirthdate));
+
+        } else {
+            return null;
+        }
+
+        ResultSet result = statement.executeQuery();
+
+
+
+        while (result.next()) {
+            int id = result.getInt("EMPLOYEE_ID");
+            String name = result.getString("NAME");
+            String surname = result.getString("SURNAME");
+            String idnp = result.getString("IDNP");
+            LocalDate birthdate = result.getObject("BIRTHDATE", LocalDate.class);
+            String address = result.getString("ADDRESS");
+            employees.add(new Employee(id, name, surname, idnp, address, birthdate));
+        }
+        statement.close();
+        connection.close();
+        return employees;
+    }
 }

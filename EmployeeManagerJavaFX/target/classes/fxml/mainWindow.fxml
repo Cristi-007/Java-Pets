@@ -46,18 +46,18 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="183.0" layoutY="409.0" mnemonicParsing="false" onAction="#openAddDialog" prefHeight="37.0" prefWidth="124.0" text="Add employee" />
-      <Button layoutX="35.0" layoutY="409.0" mnemonicParsing="false" onAction="#openEditDialog" prefHeight="37.0" prefWidth="124.0" text="Edit employee" />
-      <Button layoutX="328.0" layoutY="409.0" mnemonicParsing="false" onAction="#openDeleteDialog" prefHeight="37.0" prefWidth="124.0" text="Delete employee" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="65.0" layoutX="467.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="415.0" />
-      <Button layoutX="817.0" layoutY="415.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="52.0" text="Search" />
+      <Button layoutX="183.0" layoutY="422.0" mnemonicParsing="false" onAction="#openAddDialog" prefHeight="37.0" prefWidth="124.0" text="Add employee" />
+      <Button layoutX="35.0" layoutY="422.0" mnemonicParsing="false" onAction="#openEditDialog" prefHeight="37.0" prefWidth="124.0" text="Edit employee" />
+      <Button layoutX="328.0" layoutY="422.0" mnemonicParsing="false" onAction="#openDeleteDialog" prefHeight="37.0" prefWidth="124.0" text="Delete employee" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="79.0" layoutX="467.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="415.0" />
+      <Button layoutX="817.0" layoutY="415.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="25.0" prefWidth="52.0" text="Search" />
       <Label layoutX="628.0" layoutY="381.0" prefHeight="20.0" prefWidth="94.0" text="SEARCH BOX" textAlignment="CENTER" textFill="#0c00f5" underline="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="640.0" layoutY="429.0" prefHeight="20.0" prefWidth="157.0" />
-      <DatePicker layoutX="494.0" layoutY="429.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="searchIDNPTextField" layoutX="640.0" layoutY="429.0" prefHeight="20.0" prefWidth="157.0" />
+      <DatePicker fx:id="searchDatePicker" layoutX="494.0" layoutY="429.0" prefHeight="25.0" prefWidth="112.0" />
       <Label layoutX="696.0" layoutY="409.0" prefHeight="20.0" prefWidth="52.0" text="BY IDNP" textAlignment="CENTER" textFill="#757575">
          <font>
             <Font size="14.0" />
@@ -68,5 +68,6 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Button layoutX="817.0" layoutY="442.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="25.0" prefWidth="52.0" text="Reset" />
    </children>
 </AnchorPane>
