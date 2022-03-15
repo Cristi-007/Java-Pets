@@ -22,9 +22,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+import java.util.stream.Collectors;
 
 
 public class MainController implements Initializable {
@@ -137,16 +138,45 @@ public class MainController implements Initializable {
 
     @FXML
     void searchButton(ActionEvent event) throws SQLException {
-        String searchIDNP = searchIDNPTextField.getText();
-        LocalDate searchBithdate = searchDatePicker.getValue();
 
-        List<Employee> emps =  DBAccess.search(searchIDNP,searchBithdate);
+        // Example 1
+//        String searchIDNP = searchIDNPTextField.getText();
+//        LocalDate searchBithdate = searchDatePicker.getValue();
+//
+//        List<Employee> Employees = DBAccess.readAll();
+//
+//        List<Employee> emps =  DBAccess.search(searchIDNP,searchBithdate);
+//
+//        this.employeeData.clear();
+//
+//        if(emps != null){
+//            insertDataInTable(emps);
+//        }
+
+
+
+//        Example 2
+        List<Employee> Employees = DBAccess.readAll();
+
+        if (!searchIDNPTextField.getText().isEmpty()  && searchDatePicker.getValue() == null){
+            Employees = Employees.stream()
+                    .filter((Employee emp) -> Objects.equals(emp.getIDNP(), searchIDNPTextField.getText()) )
+                    .collect(Collectors.toList());
+
+        }else if (searchIDNPTextField.getText().isEmpty() && searchDatePicker.getValue() != null){
+            Employees = Employees.stream()
+                    .filter((Employee emp) -> Objects.equals(emp.getBirthdate(), searchDatePicker.getValue()) )
+                    .collect(Collectors.toList());
+
+        } else if (!searchIDNPTextField.getText().isEmpty() && searchDatePicker.getValue() != null){
+            Employees = Employees.stream()
+                    .filter((Employee emp) -> Objects.equals(emp.getIDNP(), searchIDNPTextField.getText()) && Objects.equals(emp.getBirthdate(), searchDatePicker.getValue()))
+                    .collect(Collectors.toList());
+
+        }
 
         this.employeeData.clear();
-
-        if(emps != null){
-            insertDataInTable(emps);
-        }
+        insertDataInTable(Employees);
     }
 
 
