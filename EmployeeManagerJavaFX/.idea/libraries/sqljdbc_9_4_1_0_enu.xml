@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sqljdbc_9.4.1.0_enu">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/sqljdbc_9.4.1.0_enu.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
