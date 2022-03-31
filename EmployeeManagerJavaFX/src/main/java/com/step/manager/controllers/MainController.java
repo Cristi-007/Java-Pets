@@ -9,22 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -192,6 +188,53 @@ public class MainController implements Initializable {
         }
         insertDataInTable(emps);
     }
+
+
+    @FXML
+    void exportData(ActionEvent event) throws IOException {
+        DirectoryChooser chooser = new DirectoryChooser();
+        Node node = (Node) event.getSource();
+
+        File directory = chooser.showDialog(node.getScene().getWindow());
+        File textFile = new File(directory, "test.txt");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
+        alert.setTitle("Please confirm you want to replace file");
+        Optional<ButtonType> optionalButton = alert.showAndWait();
+        if(optionalButton.get() == ButtonType.OK){
+            FileWriter writer = new FileWriter(textFile);
+            writer.write("Exported data");
+            writer.flush();
+            writer.close();
+        }
+
+    }
+
+    @FXML
+    void importData(ActionEvent event) throws IOException {
+        FileChooser chooser = new FileChooser();
+        List<Employee> employees = new ArrayList<>();
+
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV", "*.txt");
+        chooser.getExtensionFilters().add(filter);
+
+        Node node = (Node)event.getSource();
+        File result = chooser.showOpenDialog(node.getScene().getWindow());
+        FileReader reader = new FileReader(result);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String employeeText;
+        while((employeeText = bufferedReader.readLine()) != null) {
+            String[] data = employeeText.split(",");
+            employees.add(new Employee(Integer.parseInt(data[0]), data[3], data[1], data[4], data[5], LocalDate.parse(data[2])));
+            insertDataInTable(employees);
+        }
+    }
+
+    @FXML
+    void saveImportedData(ActionEvent event) {
+
+    }
+
 }
 
 
