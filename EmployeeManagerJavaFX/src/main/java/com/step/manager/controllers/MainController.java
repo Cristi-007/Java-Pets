@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
 
+    private List<Employee> importedEmployees = new ArrayList<>();
     public TextField searchIDNPTextField;
     public DatePicker searchDatePicker;
     @FXML
@@ -213,7 +214,6 @@ public class MainController implements Initializable {
     @FXML
     void importData(ActionEvent event) throws IOException {
         FileChooser chooser = new FileChooser();
-        List<Employee> employees = new ArrayList<>();
 
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV", "*.txt");
         chooser.getExtensionFilters().add(filter);
@@ -225,16 +225,18 @@ public class MainController implements Initializable {
         String employeeText;
         while((employeeText = bufferedReader.readLine()) != null) {
             String[] data = employeeText.split(",");
-            employees.add(new Employee(Integer.parseInt(data[0]), data[3], data[1], data[4], data[5], LocalDate.parse(data[2])));
-            insertDataInTable(employees);
+            importedEmployees.add(new Employee(Integer.parseInt(data[0]), data[3], data[1], data[4], data[5], LocalDate.parse(data[2])));
+            insertDataInTable(importedEmployees);
         }
     }
 
     @FXML
-    void saveImportedData(ActionEvent event) {
-
+    void saveImportedData(ActionEvent event) throws SQLException {
+        for (Employee emp: importedEmployees) {
+            DBAccess.insert(emp);
+        }
+        importedEmployees.clear();
     }
-
 }
 
 
