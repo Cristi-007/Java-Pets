@@ -7,8 +7,14 @@ EmployeeManagerJavaFX --> an UI application for managing employees. Data is stor
 
 GeometricCalculator --> calculates some data about 4 geometric fugures you enter in program.
 
+PostgreSQL --> app conects to database and performs C.R.U.D. operations.
+
+StoreProject --> info about products from a store.
+
 WorkingWithArrays --> it recognize consonels and vowels vrom an array and also calculates maxNumber, minNumber and sum of an intArray.
 
 jUnit --> a simple program with employee service class and test for its methods.
 
 SimpleCalculator --> simple calculator for sum, Substraction, Multiplication and Division.
+
+WorkingWithStreamAPI --> 
